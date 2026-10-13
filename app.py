@@ -382,6 +382,12 @@ def create():
     if not password1 or not password2:
         flash("VIRHE: Salasana ei voi olla tyhjä")
         return render_template("register.html", username=username)
+    
+    # For flaw 2 Identification and Authentication Failures
+    # Fix: Enforce a minimum password length of 8 characters on the server side
+    # if len(password1) < 8:
+    #     flash("VIRHE: Salasanan oltava vähintään 8 merkkiä pitkä")
+    #     return render_template("register.html", username=username)
 
     try:
         users.create_user(username, password1)
