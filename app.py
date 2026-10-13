@@ -16,6 +16,13 @@ import users
 app = Flask(__name__)
 app.secret_key = config.secret_key
 
+# Fix for flaw 3 Security Misconfiguration for session cookies
+#app.config.update(
+#    SESSION_COOKIE_SECURE=True,
+#    SESSION_COOKIE_HTTPONLY=True,
+#    SESSION_COOKIE_SAMESITE="Lax",
+#)
+
 
 def require_login():
     if "username" not in session:
