@@ -2,3 +2,5 @@ __pycache__
 venv
 database.db
 test*.png
+#added to not track .env file
+.env
