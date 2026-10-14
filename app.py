@@ -11,10 +11,13 @@ import markupsafe
 import config
 import places
 import users
-
+# Fix for Flaw 4 Security Logging and Monitoring Failures
+# import logging
 
 app = Flask(__name__)
 app.secret_key = config.secret_key
+# for flaw 4 Security Logging and Monitoring Failures
+# logging.basicConfig(filename="consolelog.log", level=logging.WARNING)
 
 # Fix for flaw 3 Security Misconfiguration for session cookies
 #app.config.update(
@@ -420,6 +423,8 @@ def login():
             session["username"] = username
             session["csrf_token"] = secrets.token_hex(16)
             return redirect("/")
+        #Flaw 4 Security Logging and Monitoring Failures
+        #logging.warning(f"Failed login attempt for: {username}")
         flash("VIRHE: väärä tunnus tai salasana")
         return redirect("/login")
 
