@@ -1,52 +1,60 @@
-# kalastuspaikat
+# Web Application Security Project - OWASP Top 10
 
-## Sovelluksen toiminnot
+This project is a required part of the Introduction to Cyber Security MOOC course. The repository contains a vulnerable web application designed to demonstrate five different flaws from the OWASP Top 10 (2021) list, along with their corresponding fixes.
+- [Flaw 1: Cryptographic Failures](https://github.com/aiki0/Securing-Software-Project-1/blob/main/config.py
+)
+- [Flaw 2: Identification and Authentication Failures](https://github.com/aiki0/Securing-Software-Project-1/blob/main/app.py#L396-L400
+)
+- [Flaw 3: Security Misconfiguration](https://github.com/aiki0/Securing-Software-Project-1/blob/main/app.py#L22-L27
+)
+- [Flaw 4: Security Logging and Monitoring Failure](https://github.com/aiki0/Securing-Software-Project-1/blob/main/app.py#L426-L427
+)
+- [Flaw 5: Vulnerable and Outdated Components](https://github.com/aiki0/Securing-Software-Project-1/blob/main/requirements.txt
+)
 
-* ✓Käyttäjä pystyy luomaan tunnuksen ja kirjautumaan sisään sovellukseen.
-* ✓Käyttäjä pystyy lisäämään, muokkaamaan ja poistamaan omia kalastuspaikkoja.
-* ✓Käyttäjä pystyy lisäämään luokat ja kuvia paikkoihin.
-* ✓Käyttäjä näkee sovellukseen lisätyt paikat.
-* ✓Käyttäjä pystyy kommentoimaan toisten käyttäjien paikkoja.
-* ✓Käyttäjä pystyy etsimään paikkoja hakusanoilla (esim. otsikko, vesistö tms..)
-* ✓Sovelluksessa on käyttäjäsivut, jotka näyttävät tilastoja ja käyttäjän lisäämät kohteet.
-* ✓Käyttäjä pystyy valitsemaan paikkaan yhden tai useamman luokittelun (esim. vesistön tyyppi tai maakunta).
+Fixes for these flaws are commented out in the code
+## Installation and Running Instructions
 
-## Sovelluksen asennus
+### For macOS / Linux
 
-Ohje on macOS/Linux järjestelmille jossa on sqlite3 sekä python3 asennettuna.
+1. **Clone the repository:**
 
-Asenna `flask`-kirjasto:
+   ```bash
+   git clone https://github.com/aiki0/Securing-Software-Project-1.git
+   cd Securing-Software-Project-1
+   ```
 
-```
-$ pip install flask
-```
+2. **Create and activate a Python virtual environment:**
 
-Luo tietokannan taulut ja lisää alkutiedot:
+   ```bash
+   python3 -m venv venv
+   source venv/bin/activate
+   ```
 
-```
-$ sqlite3 database.db < schema.sql
-$ sqlite3 database.db < init.sql
-```
+3. **Install the required dependencies:**
 
-Voit käynnistää sovelluksen näin:
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-```
-$ flask run
-```
+4. **Create the database and insert the initial data:**
 
-## Testaus suurilla tietomäärillä
+   ```bash
+   sqlite3 database.db < schema.sql
+   sqlite3 database.db < init.sql
+   ```
 
-Tietomäärät : Käyttäjiä tuhat, miljoona paikkaa ja kymmenen miljoonaa kommenttia
+5. **(Optional) Prepare for testing the Flaw 1 fix:**
+   Create an environment file to hold your custom secret key.
 
-Ennen indeksointia ilmoituksen sivulle paikan sivulle menossa kesti 0.5s-0.6s
-Syynä oli kaikkien kommenttien haku sillä lisäämällä skeemaan:
-```
-CREATE INDEX idx_place_comments ON comments (place_id);
-```
-Sivulle meno kestää vain 0.01s vaikka pyytää isolla id-numerolla olevaa paikkaa
+   ```bash
+   cp .env.example .env
+   ```
 
-Sama toistui kun lisäsin user sivulle käyttäjän kommenttien määrän, tämä nopeutui tällä:
+6. **Start the Flask application:**
 
-```
-CREATE INDEX idx_comments_user ON comments(user_id);
-```
+   ```bash
+   flask run
+   ```
+
+   The application will be accessible in your browser at `http://127.0.0.1:5000`.
