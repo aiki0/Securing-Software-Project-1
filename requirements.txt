@@ -1,0 +1,10 @@
+# Flaw 5 Vulnerable and Outdated Components the version below contains known CVE vulnerabilities
+# Below one are the vulnerable versions of the components that have known CVE vulnerabilities.
+Flask==2.0.0
+python-dotenv==1.0.0
+pyopenssl
+# To reproduce and verify the vulnerabilities, you can use the following commands: pip install pip-audit and then run pip-audit -r requirements.txt
+# Flaw 5 Fixed and Updated Components the version below contains no known CVE vulnerabilities
+#flask==3.1.3
+#python-dotenv==1.2.2
+#pyopenssl
